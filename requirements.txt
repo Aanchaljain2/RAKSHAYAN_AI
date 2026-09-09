@@ -1,0 +1,9 @@
+Flask
+pandas
+scikit-learn
+joblib
+SpeechRecognition
+pyttsx3
+PyAudio
+python-dotenv
+twilio

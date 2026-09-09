@@ -1,0 +1,212 @@
+text,intent
+I had an accident,accident
+I met with an accident,accident
+I got into an accident,accident
+I was in an accident,accident
+I crashed my bike,accident
+My bike crashed,accident
+My motorcycle crashed,accident
+I crashed my motorcycle,accident
+I fell from my bike,accident
+I fell off my bike,accident
+I fell from my motorcycle,accident
+I fell off my scooter,accident
+I fell while riding,accident
+I fell down while riding,accident
+I had a collision,accident
+My bike collided with another vehicle,accident
+Another vehicle hit me,accident
+A car hit my bike,accident
+Someone hit my motorcycle,accident
+I was hit by a vehicle,accident
+I have been in a crash,accident
+There was a crash,accident
+I just crashed,accident
+I have fallen from my bike,accident
+I lost control of my bike,accident
+I lost control and fell,accident
+My bike slipped and I fell,accident
+My scooter slipped,accident
+I skidded and crashed,accident
+I was involved in a road accident,accident
+I need help after an accident,accident
+Please help me I crashed,accident
+I have been involved in a collision,accident
+I was in a road crash,accident
+I crashed on the road,accident
+
+I am injured,medical
+I am badly hurt,medical
+I am hurt,medical
+I am seriously injured,medical
+I am bleeding,medical
+I am bleeding badly,medical
+I need medical help,medical
+I need urgent medical assistance,medical
+I need an ambulance,medical
+Please send an ambulance,medical
+Get me a doctor,medical
+I need a doctor,medical
+I need medical assistance,medical
+I cannot move my leg,medical
+I cannot move my arm,medical
+I cannot move,medical
+I am feeling very weak,medical
+I feel dizzy,medical
+I am feeling dizzy,medical
+I feel unconscious,medical
+I think I am going to faint,medical
+I have fainted,medical
+I am having trouble breathing,medical
+I cannot breathe properly,medical
+My chest hurts,medical
+I have severe pain,medical
+I am in severe pain,medical
+I have a serious injury,medical
+I have a head injury,medical
+My head is bleeding,medical
+My leg is badly injured,medical
+My arm is badly injured,medical
+I need emergency medical help,medical
+Someone please help me with my injuries,medical
+I need immediate medical attention,medical
+
+Call the police,police
+I need the police,police
+Please call the police,police
+Send police,police
+I need police assistance,police
+I need police help,police
+Please send the police,police
+Get the police here,police
+There is a dangerous situation,police
+Someone is threatening me,police
+I am being threatened,police
+Someone is following me,police
+I feel unsafe,police
+I am in danger,police
+Someone is attacking me,police
+Someone is trying to hurt me,police
+I need protection,police
+There is someone dangerous here,police
+I am being harassed,police
+A person is threatening me,police
+Please get help from the police,police
+I need emergency police assistance,police
+Call emergency services,police
+There is a fight here,police
+Someone is chasing me,police
+I think I am being followed,police
+I don't feel safe,police
+Please send help,police
+I need immediate police help,police
+There is an emergency and I need police,police
+
+I feel sleepy,fatigue
+I am feeling sleepy,fatigue
+I am very tired,fatigue
+I am too tired to ride,fatigue
+I cannot stay awake,fatigue
+I am falling asleep,fatigue
+I feel drowsy,fatigue
+I am extremely sleepy,fatigue
+I need to stop riding,fatigue
+I am exhausted,fatigue
+I feel very sleepy while riding,fatigue
+I am losing concentration,fatigue
+I am not feeling alert,fatigue
+I am struggling to stay awake,fatigue
+I keep falling asleep,fatigue
+I am too tired to drive,fatigue
+I cannot keep my eyes open,fatigue
+My eyes are closing,fatigue
+I feel sleepy on the road,fatigue
+I am becoming drowsy,fatigue
+I am not able to concentrate,fatigue
+I feel exhausted while riding,fatigue
+I need a break because I am tired,fatigue
+I am getting sleepy while driving,fatigue
+I don't feel alert enough to ride,fatigue
+I am very drowsy,fatigue
+I feel like I might fall asleep,fatigue
+I am losing focus while riding,fatigue
+I need to rest before riding,fatigue
+I am too exhausted to continue,fatigue
+
+My helmet is broken,helmet_issue
+My helmet is damaged,helmet_issue
+There is something wrong with my helmet,helmet_issue
+My helmet strap is broken,helmet_issue
+My helmet strap came loose,helmet_issue
+My helmet is not fitting properly,helmet_issue
+My helmet does not fit,helmet_issue
+My helmet came off,helmet_issue
+My helmet fell off,helmet_issue
+The helmet is loose,helmet_issue
+My helmet buckle is broken,helmet_issue
+The helmet buckle is not working,helmet_issue
+My helmet visor is broken,helmet_issue
+My helmet is cracked,helmet_issue
+My helmet has a problem,helmet_issue
+I have a problem with my helmet,helmet_issue
+My helmet is not secure,helmet_issue
+My helmet keeps moving,helmet_issue
+My helmet is uncomfortable,helmet_issue
+I cannot lock my helmet,helmet_issue
+The helmet lock is broken,helmet_issue
+My helmet sensor is not working,helmet_issue
+The helmet is not detecting me,helmet_issue
+My helmet is not connected,helmet_issue
+Helmet connection has failed,helmet_issue
+
+My bike won't start,bike_issue
+My bike is not starting,bike_issue
+My motorcycle won't start,bike_issue
+My scooter won't start,bike_issue
+My bike has stopped,bike_issue
+My bike suddenly stopped,bike_issue
+My motorcycle broke down,bike_issue
+My bike broke down,bike_issue
+My scooter broke down,bike_issue
+My bike has a problem,bike_issue
+Something is wrong with my bike,bike_issue
+I have a problem with my motorcycle,bike_issue
+My engine stopped,bike_issue
+My engine is not working,bike_issue
+My bike engine is not starting,bike_issue
+My bike has no power,bike_issue
+My motorcycle has no power,bike_issue
+My bike battery is dead,bike_issue
+My battery is dead,bike_issue
+My bike has a flat tyre,bike_issue
+My tire is flat,bike_issue
+I have a puncture,bike_issue
+My bike tyre is punctured,bike_issue
+I ran out of fuel,bike_issue
+My bike has no fuel,bike_issue
+I need help with my bike,bike_issue
+My motorcycle has broken down,bike_issue
+My brakes are not working,bike_issue
+My bike brakes failed,bike_issue
+My bike is making a strange noise,bike_issue
+
+Everything is fine,normal
+I am fine,normal
+I am okay,normal
+I am safe,normal
+No problem,normal
+Nothing happened,normal
+Everything is okay,normal
+I am completely fine,normal
+There is no problem,normal
+No emergency,normal
+I am not in danger,normal
+I don't need help,normal
+Everything is normal,normal
+The ride is going fine,normal
+My bike is fine,normal
+I am feeling okay,normal
+I am safe and okay,normal
+There is nothing wrong,normal
+I am alright,normal
+No issue,normal

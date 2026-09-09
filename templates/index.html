@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rakshayan AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0f17;
+            color: white;
+        }
+
+        header {
+            background: #111827;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #263043;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .status {
+            color: #22c55e;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 25px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            color: #9ca3af;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #263043;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .card-title {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .safe {
+            color: #22c55e;
+        }
+
+        .warning {
+            color: #f59e0b;
+        }
+
+        .danger {
+            color: #ef4444;
+        }
+
+        .panel {
+            background: #111827;
+            border: 1px solid #263043;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .panel h2 {
+            margin-top: 0;
+        }
+
+        #conversation {
+            background: #0b0f17;
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 180px;
+            max-height: 350px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            margin-bottom: 14px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background: #1d4ed8;
+        }
+
+        .ai-message {
+            background: #1f2937;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 13px;
+            border-radius: 8px;
+            border: 1px solid #374151;
+            background: #0b0f17;
+            color: white;
+            outline: none;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .send-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .voice-btn {
+            background: #16a34a;
+            color: white;
+        }
+
+        .sos-btn {
+            background: #dc2626;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #374151;
+            color: white;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .quick-actions button {
+            background: #1f2937;
+            color: white;
+            border: 1px solid #374151;
+        }
+
+        .confirmation {
+            display: none;
+            text-align: center;
+            background: #1a1212;
+            border: 1px solid #7f1d1d;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .confirmation h3 {
+            color: #ef4444;
+        }
+
+        .voice-confirmation-status {
+            color: #f59e0b;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+        .sos-report {
+            display: none;
+            background: #111827;
+            border: 1px solid #7f1d1d;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .sos-report h2 {
+            color: #ef4444;
+        }
+
+        .report-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #263043;
+        }
+
+        .report-label {
+            color: #9ca3af;
+        }
+
+        .report-value {
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .manual-sos {
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            color: #6b7280;
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        a {
+            color: #60a5fa;
+        }
+
+        @media (max-width: 800px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .input-area {
+                flex-direction: column;
+            }
+
+            .report-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .report-value {
+                text-align: left;
+            }
+
+            .confirmation-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🏍️ RAKSHAYAN AI</div>
+    <div class="status">● SYSTEM ONLINE</div>
+</header>
+
+
+<div class="container">
+
+    <div class="welcome">
+        <h1>Welcome to Rakshayan AI</h1>
+        <p>Your intelligent two-wheeler emergency assistance system</p>
+    </div>
+
+
+    <!-- STATUS CARDS -->
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-title">🎤 Voice Assistant</div>
+            <div id="voiceStatus" class="card-value safe">
+                Ready
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🪖 Helmet Status</div>
+            <div class="card-value safe">
+                Connected
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📍 Location</div>
+            <div id="locationStatus" class="card-value warning">
+                Waiting for GPS
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">❤️ Health Status</div>
+            <div class="card-value safe">
+                Normal
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🚨 Emergency Detection</div>
+            <div id="emergencyStatus" class="card-value safe">
+                Monitoring
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">📞 Emergency Contact</div>
+            <div class="card-value safe">
+                Available
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- AI ASSISTANT -->
+    <div class="panel">
+
+        <h2>🤖 Rakshayan AI Assistant</h2>
+
+        <div id="conversation">
+
+            <div class="message ai-message">
+                <strong>Rakshayan AI:</strong><br>
+                Hello! I am Rakshayan AI. Is there any issue or emergency?
+            </div>
+
+        </div>
+
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Describe your issue..."
+                onkeydown="handleEnter(event)"
+            >
+
+            <button
+                class="send-btn"
+                onclick="sendMessage()"
+            >
+                SEND
+            </button>
+
+            <button
+                class="voice-btn"
+                onclick="startVoice()"
+            >
+                🎤 VOICE
+            </button>
+
+        </div>
+
+
+        <!-- SOS CONFIRMATION -->
+        <div
+            id="confirmationBox"
+            class="confirmation"
+        >
+
+            <h3>🆘 SOS Confirmation</h3>
+
+            <p id="confirmationText">
+                Do you want me to send an SOS?
+            </p>
+
+            <div
+                id="voiceConfirmationStatus"
+                class="voice-confirmation-status"
+            >
+                🎤 Waiting for your voice confirmation...
+            </div>
+
+            <div class="confirmation-buttons">
+
+                <button
+                    id="confirmButton"
+                    class="sos-btn"
+                    onclick="confirmSOS()"
+                >
+                    YES, SEND SOS
+                </button>
+
+                <button
+                    id="cancelButton"
+                    class="cancel-btn"
+                    onclick="cancelSOS()"
+                >
+                    NO, CANCEL
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <div class="panel">
+
+        <h2>⚡ Quick Emergency Actions</h2>
+
+        <div class="quick-actions">
+
+            <button onclick="quickMessage('I have been in an accident')">
+                🚗 Accident
+            </button>
+
+            <button onclick="quickMessage('I am having a medical emergency')">
+                ❤️ Medical
+            </button>
+
+            <button onclick="quickMessage('I need police assistance')">
+                👮 Police
+            </button>
+
+            <button onclick="quickMessage('I am feeling very tired and sleepy')">
+                😴 Fatigue
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SOS REPORT -->
+    <div
+        id="sosReport"
+        class="sos-report"
+    >
+
+        <h2>🆘 SOS REPORT</h2>
+
+        <div class="report-row">
+            <div class="report-label">
+                Emergency Type
+            </div>
+
+            <div id="sosEmergencyType" class="report-value">
+                -
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Rider
+            </div>
+
+            <div id="sosRider" class="report-value">
+                -
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Rider Phone
+            </div>
+
+            <div id="sosRiderPhone" class="report-value">
+                -
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Emergency Contact
+            </div>
+
+            <div id="sosContact" class="report-value">
+                -
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                Contact Phone
+            </div>
+
+            <div id="sosContactPhone" class="report-value">
+                -
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                📍 Location
+            </div>
+
+            <div id="sosLocation" class="report-value">
+                Location not available
+            </div>
+        </div>
+
+
+        <div class="report-row">
+            <div class="report-label">
+                🕐 Time
+            </div>
+
+            <div id="sosTime" class="report-value">
+                -
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- MANUAL SOS -->
+    <div class="panel manual-sos">
+
+        <h2>🚨 Manual SOS</h2>
+
+        <p>
+            Use this if you need emergency assistance immediately.
+        </p>
+
+        <button
+            class="sos-btn"
+            onclick="manualSOS()"
+        >
+            🆘 ACTIVATE SOS
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+    Rakshayan AI — Smart Helmet Emergency Assistance System
+</footer>
+
+
+<script>
+
+    let detectedEmergency = "";
+
+    // GPS VARIABLES
+    let currentLatitude = null;
+    let currentLongitude = null;
+
+    // Prevent multiple confirmation requests
+    let confirmationActive = false;
+
+
+    // ADD MESSAGE
+    function addMessage(sender, message, type) {
+
+        const conversation =
+            document.getElementById("conversation");
+
+        const messageDiv =
+            document.createElement("div");
+
+        messageDiv.className =
+            "message " + type;
+
+        messageDiv.innerHTML =
+            `<strong>${sender}:</strong><br>${message}`;
+
+        conversation.appendChild(messageDiv);
+
+        conversation.scrollTop =
+            conversation.scrollHeight;
+    }
+
+
+    // AI SPEAK
+    function makeAISpeak(text) {
+
+        /*
+         * The current app.py does not need a /speak route
+         * for the emergency logic.
+         *
+         * Browser speech synthesis is used here so the
+         * dashboard can speak the AI response directly.
+         */
+
+        if ("speechSynthesis" in window) {
+
+            window.speechSynthesis.cancel();
+
+            const utterance =
+                new SpeechSynthesisUtterance(text);
+
+            utterance.rate = 0.95;
+            utterance.pitch = 1;
+
+            window.speechSynthesis.speak(
+                utterance
+            );
+        }
+
+    }
+
+
+    // SEND TEXT MESSAGE
+    function sendMessage() {
+
+        const input =
+            document.getElementById("userInput");
+
+        const text =
+            input.value.trim();
+
+        if (!text) {
+            return;
+        }
+
+
+        addMessage(
+            "You",
+            text,
+            "user-message"
+        );
+
+
+        input.value = "";
+
+
+        document.getElementById(
+            "emergencyStatus"
+        ).innerText =
+            "Analyzing...";
+
+
+        document.getElementById(
+            "emergencyStatus"
+        ).className =
+            "card-value warning";
+
+
+        fetch("/detect", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                text: text
+            })
+
+        })
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(data => {
+
+            if (data.success) {
+
+                processDetection(data);
+
+            } else {
+
+                addMessage(
+                    "Rakshayan AI",
+                    data.message,
+                    "ai-message"
+                );
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            addMessage(
+                "Rakshayan AI",
+                "Something went wrong while processing your request.",
+                "ai-message"
+            );
+
+        });
+
+    }
+
+
+    // START VOICE FOR ISSUE DESCRIPTION
+    function startVoice() {
+
+        const voiceStatus =
+            document.getElementById("voiceStatus");
+
+
+        voiceStatus.innerText =
+            "Listening...";
+
+        voiceStatus.className =
+            "card-value warning";
+
+
+        fetch("/voice")
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(data => {
+
+            voiceStatus.innerText =
+                "Ready";
+
+            voiceStatus.className =
+                "card-value safe";
+
+
+            if (data.success) {
+
+                addMessage(
+                    "You",
+                    data.text,
+                    "user-message"
+                );
+
+                processDetection(data);
+
+            } else {
+
+                addMessage(
+                    "Rakshayan AI",
+                    data.message,
+                    "ai-message"
+                );
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            voiceStatus.innerText =
+                "Ready";
+
+            voiceStatus.className =
+                "card-value safe";
+
+            addMessage(
+                "Rakshayan AI",
+                "Voice input could not be processed.",
+                "ai-message"
+            );
+
+        });
+
+    }
+
+
+    // PROCESS EMERGENCY DETECTION
+    function processDetection(data) {
+
+        detectedEmergency =
+            data.intent;
+
+
+        addMessage(
+            "Rakshayan AI",
+            data.response,
+            "ai-message"
+        );
+
+
+        makeAISpeak(data.response);
+
+
+        const emergencyStatus =
+            document.getElementById(
+                "emergencyStatus"
+            );
+
+
+        if (data.intent !== "normal") {
+
+            emergencyStatus.innerText =
+                data.intent.toUpperCase();
+
+            emergencyStatus.className =
+                "card-value danger";
+
+
+            document.getElementById(
+                "confirmationBox"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "confirmationText"
+            ).innerText =
+                `I detected ${data.intent.replace("_", " ")}. Do you want me to send an SOS?`;
+
+
+            /*
+             * Give the AI a moment to speak the SOS question,
+             * then automatically start listening for YES/NO.
+             */
+            startAutomaticSOSVoiceConfirmation();
+
+        }
+
+        else {
+
+            emergencyStatus.innerText =
+                "Monitoring";
+
+            emergencyStatus.className =
+                "card-value safe";
+
+        }
+
+    }
+
+
+    // AUTOMATIC VOICE SOS CONFIRMATION
+    function startAutomaticSOSVoiceConfirmation() {
+
+        if (confirmationActive) {
+            return;
+        }
+
+        confirmationActive = true;
+
+
+        const voiceStatus =
+            document.getElementById(
+                "voiceConfirmationStatus"
+            );
+
+
+        const confirmButton =
+            document.getElementById(
+                "confirmButton"
+            );
+
+
+        const cancelButton =
+            document.getElementById(
+                "cancelButton"
+            );
+
+
+        voiceStatus.innerText =
+            "🎤 Listening for YES or NO...";
+
+        voiceStatus.style.color =
+            "#f59e0b";
+
+
+        confirmButton.disabled =
+            false;
+
+        cancelButton.disabled =
+            false;
+
+
+        /*
+         * Wait until the AI has had time to say the
+         * emergency question before opening the microphone.
+         */
+        setTimeout(function() {
+
+            fetch("/confirm_voice")
+
+            .then(response =>
+                response.json()
+            )
+
+            .then(data => {
+
+                confirmationActive =
+                    false;
+
+
+                if (data.success) {
+
+                    if (data.decision === "yes") {
+
+                        voiceStatus.innerText =
+                            "✅ Voice confirmation received: YES";
+
+                        voiceStatus.style.color =
+                            "#22c55e";
+
+
+                        handleSOSSuccess(data);
+
+                    }
+
+                    else if (
+                        data.decision === "no"
+                    ) {
+
+                        voiceStatus.innerText =
+                            "❌ Voice confirmation received: NO";
+
+                        voiceStatus.style.color =
+                            "#9ca3af";
+
+
+                        handleSOSCancelled();
+
+                    }
+
+                }
+
+                else {
+
+                    voiceStatus.innerText =
+                        "❓ I could not understand. Please say YES or NO.";
+
+                    voiceStatus.style.color =
+                        "#f59e0b";
+
+
+                    addMessage(
+                        "Rakshayan AI",
+                        data.message ||
+                        "Please say yes or no.",
+                        "ai-message"
+                    );
+
+                }
+
+            })
+
+            .catch(error => {
+
+                confirmationActive =
+                    false;
+
+                console.error(error);
+
+                voiceStatus.innerText =
+                    "⚠️ Voice confirmation unavailable. Use the buttons.";
+
+                voiceStatus.style.color =
+                    "#f59e0b";
+
+
+                addMessage(
+                    "Rakshayan AI",
+                    "I could not start voice confirmation. You can use the buttons below.",
+                    "ai-message"
+                );
+
+            });
+
+        }, 2500);
+
+    }
+
+
+    // CONFIRM SOS USING BUTTON
+    function confirmSOS() {
+
+        if (confirmationActive) {
+
+            confirmationActive =
+                false;
+
+        }
+
+
+        const button =
+            document.getElementById(
+                "confirmButton"
+            );
+
+
+        const cancelButton =
+            document.getElementById(
+                "cancelButton"
+            );
+
+
+        button.disabled =
+            true;
+
+        cancelButton.disabled =
+            true;
+
+
+        button.innerText =
+            "PREPARING SOS...";
+
+
+        document.getElementById(
+            "voiceConfirmationStatus"
+        ).innerText =
+            "✅ SOS confirmed using dashboard button.";
+
+        document.getElementById(
+            "voiceConfirmationStatus"
+        ).style.color =
+            "#22c55e";
+
+
+        fetch("/confirm_sos", {
+
+            method: "POST"
+
+        })
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(data => {
+
+            button.disabled =
+                false;
+
+            cancelButton.disabled =
+                false;
+
+            button.innerText =
+                "YES, SEND SOS";
+
+
+            if (
+                data.success &&
+                data.sos
+            ) {
+
+                handleSOSSuccess(data);
+
+            }
+
+            else {
+
+                addMessage(
+                    "Rakshayan AI",
+                    data.message ||
+                    "Unable to create SOS.",
+                    "ai-message"
+                );
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            button.disabled =
+                false;
+
+            cancelButton.disabled =
+                false;
+
+            button.innerText =
+                "YES, SEND SOS";
+
+
+            addMessage(
+                "Rakshayan AI",
+                "Unable to connect to the SOS system.",
+                "ai-message"
+            );
+
+        });
+
+    }
+
+
+    // HANDLE SUCCESSFUL SOS
+    function handleSOSSuccess(data) {
+
+        if (
+            data.success &&
+            data.sos
+        ) {
+
+            displaySOSReport(
+                data.sos
+            );
+
+
+            document.getElementById(
+                "confirmationBox"
+            ).style.display =
+                "none";
+
+
+            addMessage(
+                "Rakshayan AI",
+                data.response,
+                "ai-message"
+            );
+
+
+            makeAISpeak(
+                data.response
+            );
+
+
+            document.getElementById(
+                "emergencyStatus"
+            ).innerText =
+                "SOS PREPARED";
+
+            document.getElementById(
+                "emergencyStatus"
+            ).className =
+                "card-value danger";
+
+        }
+
+    }
+
+
+    // DISPLAY SOS REPORT
+    function displaySOSReport(sos) {
+
+        document.getElementById(
+            "sosReport"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "sosEmergencyType"
+        ).innerText =
+            sos.emergency_type ||
+            detectedEmergency ||
+            "-";
+
+
+        document.getElementById(
+            "sosRider"
+        ).innerText =
+            sos.rider_name ||
+            "-";
+
+
+        document.getElementById(
+            "sosRiderPhone"
+        ).innerText =
+            sos.rider_phone ||
+            "-";
+
+
+        document.getElementById(
+            "sosContact"
+        ).innerText =
+            sos.emergency_contact_name ||
+            "-";
+
+
+        document.getElementById(
+            "sosContactPhone"
+        ).innerText =
+            sos.emergency_contact_phone ||
+            "-";
+
+
+        const locationElement =
+            document.getElementById(
+                "sosLocation"
+            );
+
+
+        if (
+            sos.latitude !== null &&
+            sos.latitude !== undefined &&
+            sos.longitude !== null &&
+            sos.longitude !== undefined
+        ) {
+
+            const mapLink =
+                "https://www.google.com/maps?q=" +
+                sos.latitude +
+                "," +
+                sos.longitude;
+
+
+            locationElement.innerHTML =
+                `<a href="${mapLink}" target="_blank">
+                    📍 Open Live Location in Google Maps
+                </a>`;
+
+        }
+
+        else {
+
+            locationElement.innerText =
+                sos.location ||
+                "Location not available";
+
+        }
+
+
+        document.getElementById(
+            "sosTime"
+        ).innerText =
+            sos.time ||
+            "-";
+
+
+        document.getElementById(
+            "sosReport"
+        ).scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // CANCEL SOS
+    function cancelSOS() {
+
+        confirmationActive =
+            false;
+
+
+        const confirmationBox =
+            document.getElementById(
+                "confirmationBox"
+            );
+
+
+        confirmationBox.style.display =
+            "none";
+
+
+        document.getElementById(
+            "voiceConfirmationStatus"
+        ).innerText =
+            "Voice confirmation cancelled.";
+
+
+        addMessage(
+            "Rakshayan AI",
+            "SOS cancelled. I am still monitoring your safety.",
+            "ai-message"
+        );
+
+
+        makeAISpeak(
+            "SOS cancelled. I am still monitoring your safety."
+        );
+
+
+        document.getElementById(
+            "emergencyStatus"
+        ).innerText =
+            "Monitoring";
+
+
+        document.getElementById(
+            "emergencyStatus"
+        ).className =
+            "card-value safe";
+
+    }
+
+
+    // HANDLE VOICE NO
+    function handleSOSCancelled() {
+
+        confirmationActive =
+            false;
+
+
+        document.getElementById(
+            "confirmationBox"
+        ).style.display =
+            "none";
+
+
+        addMessage(
+            "Rakshayan AI",
+            "SOS cancelled. I am still monitoring your safety.",
+            "ai-message"
+        );
+
+
+        makeAISpeak(
+            "SOS cancelled. I am still monitoring your safety."
+        );
+
+
+        document.getElementById(
+            "emergencyStatus"
+        ).innerText =
+            "Monitoring";
+
+
+        document.getElementById(
+            "emergencyStatus"
+        ).className =
+            "card-value safe";
+
+    }
+
+
+    // ENTER KEY
+    function handleEnter(event) {
+
+        if (event.key === "Enter") {
+
+            sendMessage();
+
+        }
+
+    }
+
+
+    // QUICK ACTION
+    function quickMessage(message) {
+
+        document.getElementById(
+            "userInput"
+        ).value =
+            message;
+
+        sendMessage();
+
+    }
+
+
+    // MANUAL SOS
+    function manualSOS() {
+
+        const confirmation =
+            confirm(
+                "Are you sure you want to activate an SOS?"
+            );
+
+
+        if (!confirmation) {
+            return;
+        }
+
+
+        fetch("/confirm_sos", {
+
+            method: "POST"
+
+        })
+
+        .then(response =>
+            response.json()
+        )
+
+        .then(data => {
+
+            if (
+                data.success &&
+                data.sos
+            ) {
+
+                displaySOSReport(
+                    data.sos
+                );
+
+
+                addMessage(
+                    "Rakshayan AI",
+                    data.response,
+                    "ai-message"
+                );
+
+                makeAISpeak(
+                    data.response
+                );
+
+            }
+
+            else {
+
+                alert(
+                    data.message ||
+                    "Unable to activate SOS."
+                );
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+            alert(
+                "Unable to connect to the SOS system."
+            );
+
+        });
+
+    }
+
+
+    // START GPS WHEN DASHBOARD LOADS
+    window.addEventListener(
+        "load",
+        function() {
+
+            getGPSLocation();
+
+        }
+    );
+
+
+    // GET GPS LOCATION
+    function getGPSLocation() {
+
+        const locationStatus =
+            document.getElementById(
+                "locationStatus"
+            );
+
+
+        if (!navigator.geolocation) {
+
+            locationStatus.innerText =
+                "GPS Not Supported";
+
+            locationStatus.className =
+                "card-value danger";
+
+            return;
+        }
+
+
+        locationStatus.innerText =
+            "Requesting GPS...";
+
+        locationStatus.className =
+            "card-value warning";
+
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                currentLatitude =
+                    position.coords.latitude;
+
+                currentLongitude =
+                    position.coords.longitude;
+
+
+                console.log(
+                    "GPS Latitude:",
+                    currentLatitude
+                );
+
+
+                console.log(
+                    "GPS Longitude:",
+                    currentLongitude
+                );
+
+
+                locationStatus.innerText =
+                    "GPS Ready";
+
+                locationStatus.className =
+                    "card-value safe";
+
+
+                fetch("/update_location", {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        latitude:
+                            currentLatitude,
+
+                        longitude:
+                            currentLongitude
+
+                    })
+
+                })
+
+                .then(response =>
+                    response.json()
+                )
+
+                .then(data => {
+
+                    if (data.success) {
+
+                        console.log(
+                            "✅ GPS sent to backend"
+                        );
+
+                        console.log(
+                            "🗺️ Map link:",
+                            data.map_link
+                        );
+
+                    }
+
+                    else {
+
+                        console.error(
+                            "❌ GPS backend error:",
+                            data.message
+                        );
+
+                    }
+
+                })
+
+                .catch(error => {
+
+                    console.error(
+                        "❌ Could not send GPS to backend:",
+                        error
+                    );
+
+                });
+
+            },
+
+
+            function(error) {
+
+                console.error(
+                    "GPS Error:",
+                    error
+                );
+
+
+                locationStatus.innerText =
+                    "GPS Unavailable";
+
+                locationStatus.className =
+                    "card-value danger";
+
+            },
+
+
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
